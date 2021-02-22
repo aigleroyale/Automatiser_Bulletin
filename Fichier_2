@@ -1,0 +1,39 @@
+# pip install pyttsx3
+import numpy as np
+import pandas as pd
+from tkinter.filedialog import askopenfilename
+from tkinter import Tk
+
+def autom():
+    root = Tk()
+    root.withdraw()
+    liste = []
+
+    n = int(input('entrer le nombre de matières : '))
+    for i in range(n):
+        filename = askopenfilename(title="CSV ?")
+        base = pd.read_excel(filename)
+        liste.append(base)
+    
+    listes = liste
+    first = listes[0]
+
+    for j in listes:
+        BASE = first.merge(j)
+        first = BASE
+        BASES = first
+    
+    BASES.index = BASES['NOM']
+    BASES = BASES.drop(['NOM'], axis = 1)
+    
+    M = BASES.mean(axis = 1)
+    M = round(M,2)
+    DF2= BASES.assign(MOYENNE = M)
+    DF2
+    
+    R = DF2.MOYENNE.rank(ascending = False)
+    RANGS = list(R)
+    DF = DF2.assign(RANG = RANGS)
+    DF
+
+    print(DF)
