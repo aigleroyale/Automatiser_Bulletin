@@ -1,10 +1,12 @@
 # pip install pyttsx3
+
 import numpy as np
 import pandas as pd
+
 from tkinter.filedialog import askopenfilename
 from tkinter import Tk
 
-def autom():
+def automate():
     root = Tk()
     root.withdraw()
     liste = []
@@ -34,6 +36,7 @@ def autom():
     R = DF2.MOYENNE.rank(ascending = False)
     RANGS = list(R)
     DF = DF2.assign(RANG = RANGS)
+    DF.sort_values(by=['RANG'], inplace = True)
     DF
 
     print(DF)
