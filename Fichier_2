@@ -1,12 +1,16 @@
 # pip install pyttsx3
-
+# nous importons les packages ici
 import numpy as np
 import pandas as pd
+
+# tkinter va nous permettre d'ouvrir une fenetre de dialogue
+# afin de choisir nos fiches de données
 
 from tkinter.filedialog import askopenfilename
 from tkinter import Tk
 
-def automate():
+# nous avons 
+def automate(chemin, nom_fichier):
     root = Tk()
     root.withdraw()
     liste = []
@@ -25,8 +29,8 @@ def automate():
         first = BASE
         BASES = first
     
-    BASES.index = BASES['NOM']
-    BASES = BASES.drop(['NOM'], axis = 1)
+    #BASES.index = BASES['NOM']
+    #BASES = BASES.drop(['NOM'], axis = 1)
     
     M = BASES.mean(axis = 1)
     M = round(M,2)
@@ -38,5 +42,6 @@ def automate():
     DF = DF2.assign(RANG = RANGS)
     DF.sort_values(by=['RANG'], inplace = True)
     DF
+    DF.to_excel(chemin+ "/" + nom_fichier + ".xlsx",  index=False)
 
     print(DF)
