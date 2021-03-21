@@ -1,0 +1,13 @@
+automat <- function(){
+  library(kableExtra)
+  library(readxl)
+  base <- read_excel(file.choose())
+  for ( i in (1:dim(base)[1])){
+    a <-  kbl(base[i,]) %>%
+    kable_styling(bootstrap_options = c("bordered", "hover") , full_width = F, position = "center" ) %>% 
+    add_header_above(c( " ","UE ECONOMIE" = 1, "UE QUANTITATIVE" = 1, "UE CONDUITE PROJET" = 1 , " " , " " ))%>% 
+    add_header_above(c( "Bulletin" = 6 ))
+    print(a)
+  }
+  return( rmarkdown::render("Bulletin(1).R"))
+}
