@@ -9,7 +9,13 @@ import pandas as pd
 from tkinter.filedialog import askopenfilename
 from tkinter import Tk
 
-# nous avons 
+# nous definissons une fonction dans laquelle nous allons
+# rassembler notre code
+# notre fonction permettra
+# notre fonction comporte deux arguments
+# chemin : precise 
+
+# c
 def automate(chemin, nom_fichier):
     root = Tk()
     root.withdraw()
