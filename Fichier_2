@@ -1,53 +1,50 @@
-# pip install pyttsx3
-# nous importons les packages ici
-import numpy as np
-import pandas as pd
-
-# tkinter va nous permettre d'ouvrir une fenetre de dialogue
-# afin de choisir nos fiches de données
-
-from tkinter.filedialog import askopenfilename
-from tkinter import Tk
-
-# nous definissons une fonction dans laquelle nous allons
-# rassembler notre code
-# notre fonction permettra
-# notre fonction comporte deux arguments
-# chemin : precise 
-
-# c
-def automate(chemin, nom_fichier):
-    root = Tk()
-    root.withdraw()
-    liste = []
-
-    n = int(input('entrer le nombre de matières : '))
-    for i in range(n):
-        filename = askopenfilename(title="CSV ?")
-        base = pd.read_excel(filename)
-        liste.append(base)
+def base_moyenne(chemin, nom_fichier, Nclass):
     
-    listes = liste
-    first = listes[0]
+    ETUDIANT = []
 
-    for j in listes:
-        BASE = first.merge(j)
-        first = BASE
-        BASES = first
+    for i in range(Nclass):
+        print("Quel est le nom de l'étudiant ? "+str(i+1)+": ")
+        NOM = input()
+        ETUDIANT.append(NOM)
+
+    ECONOMIE = np.array([])
+    MATHEMATIQUE = np.array([])
+    PROJET = np.array([])
+
+    for p in ETUDIANT:
+        print('Entrer la moyenne en economie de '+p)
+        eco = int(input())
     
-    #BASES.index = BASES['NOM']
-    #BASES = BASES.drop(['NOM'], axis = 1)
+        print('Entrer la moyenne en mathématique de '+p)
+        math = int(input())
     
-    M = BASES.mean(axis = 1)
+        print('Entrer la moyenne en projet de '+p)
+        proj = int(input())
+    
+        ECONOMIE = np.append(ECONOMIE, eco)
+        MATHEMATIQUE = np.append(MATHEMATIQUE, math)
+        PROJET = np.append(PROJET, proj)
+    
+    data = { 
+            "NOM_PRENOM" : np.array(ETUDIANT),
+            "ECONOMIE" : np.array(ECONOMIE),
+            "MATHEMATIQUE" : np.array(MATHEMATIQUE),
+            "PROJET" : np.array(PROJET),
+            }
+    
+    DF1 = pd.DataFrame.from_dict(data)
+
+    M = DF1.mean(axis = 1)
     M = round(M,2)
-    DF2= BASES.assign(MOYENNE = M)
+    DF2= DF1.assign(MOYENNE = M)
     DF2
-    
+
     R = DF2.MOYENNE.rank(ascending = False)
-    RANGS = list(R)
+    RANGS = round(R,0)
     DF = DF2.assign(RANG = RANGS)
+    DF[['RANG']].astype(int)
     DF.sort_values(by=['RANG'], inplace = True)
     DF
+    
     DF.to_excel(chemin+ "/" + nom_fichier + ".xlsx",  index=False)
-
-    print(DF)
+    return DF
