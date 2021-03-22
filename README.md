@@ -69,7 +69,7 @@ A partir d'un _Knit_ nous obtenons notre bulletin de note.
 Nous procédons de la meme manière que pour l'exemplaire unique, à la différence près.
 C'est-à-dire qu'il suffit d'ajouter les noms et prénoms des étudiants et suivre le meme raisonnement. 
 
-## Limites et amélioration possible du projet 
+## Limites et améliorations possibles du projet 
 
 Le principal problème au niveau de notre projet est qu'il n'est pas possible de générer plusieurs exemplaires de bulletins à la fois (à cause du fichier excel utilisé).
 Il faut noter qu'il est possible d'améliorer l'apparence de ces bulletins de notes en y intégrant les noms des professeurs pour chaque matière, les coefficients pour chaque UE, etc.
