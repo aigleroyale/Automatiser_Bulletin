@@ -29,7 +29,7 @@ def automate(chemin, nom_fichier):
     
     listes = liste
     first = listes[0]
-
+    # fusion des bases de données
     for j in listes:
         BASE = first.merge(j)
         first = BASE
@@ -37,17 +37,24 @@ def automate(chemin, nom_fichier):
     
     #BASES.index = BASES['NOM']
     #BASES = BASES.drop(['NOM'], axis = 1)
-    
+    # calcul de la moyenne
     M = BASES.mean(axis = 1)
     M = round(M,2)
     DF2= BASES.assign(MOYENNE = M)
     DF2
     
+    # fais un classement par ordre croissant
+    
     R = DF2.MOYENNE.rank(ascending = False)
     RANGS = list(R)
+    
+    # calculer le rang
+    
     DF = DF2.assign(RANG = RANGS)
     DF.sort_values(by=['RANG'], inplace = True)
     DF
+    
+    # sauvegarder en excel
     DF.to_excel(chemin+ "/" + nom_fichier + ".xlsx",  index=False)
 
-    print(DF)
+    return DF
